@@ -43,6 +43,14 @@ function NavBar() {
           <ListItemIcon><MailIcon /></ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
+        <ListItem button onClick={_handleNavigate('/login')}>
+          <ListItemIcon><MailIcon /></ListItemIcon>
+          <ListItemText primary="Login" />
+        </ListItem>
+        <ListItem button onClick={_handleNavigate('/register')}>
+          <ListItemIcon><MailIcon /></ListItemIcon>
+          <ListItemText primary="Register" />
+        </ListItem>
       </List>
     </div>
   );
@@ -54,7 +62,8 @@ function NavBar() {
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
-          classes={{paper: classes.drawerPaper,
+          classes={{
+            paper: classes.drawerPaper,
           }}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
