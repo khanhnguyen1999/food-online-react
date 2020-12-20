@@ -4,11 +4,12 @@ import { userService } from "services";
 const nameSpace = 'user:';
 
 // types
-import { IRouteAuth } from 'models/IRoute';
+import { IUserInfo } from 'models/IRoute';
 
 export const SET_USER_INFOR = `${nameSpace}SET_USER_INFOR`;
 
-export const actSetUserInfor = ({ user }: IRouteAuth) => {
+
+export const actSetUserInfor = ({ user }: IUserInfo) => {
   return {
     type: SET_USER_INFOR,
     payload: {

@@ -2,10 +2,12 @@ export type IRouteAuth = {
   component: React.FunctionComponent,
   isAuthenticated?: boolean,
   exact?: boolean,
-  path: string,
+  path: string
+}
+export type IUserInfo = {
+  token: any,
   email: string,
   password: string,
-  userid: number,
-  token: any,
-  user: any
+  user: string,
+  userid: number
 }

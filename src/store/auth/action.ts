@@ -29,13 +29,11 @@ export const actLogoutSuccess = () => {
   }
 }
 
-type Itype = {
-  email: string,
-  password: string
-}
+// types
+import { IUserInfo } from 'models/IRoute';
 
 // asyncHandleLogin là một function return về một function khác ???
-export const asyncHandleLogin = ({ email, password }: Itype) => {
+export const asyncHandleLogin = ({ email, password }: IUserInfo) => {
   return async (dispatch: Dispatch) => {
     try {
       // dispatch(actShowLoading());

@@ -1,10 +1,10 @@
 import { apiService } from "./index";
 
 // types
-import { IRouteAuth } from 'models/IRoute';
+import { IUserInfo } from 'models/IRoute';
 
 const authService = {
-  login({ email, password }: IRouteAuth) {
+  login({ email, password }: IUserInfo) {
     return apiService
       .call()
       .post('/member/login.php', { email, password });
