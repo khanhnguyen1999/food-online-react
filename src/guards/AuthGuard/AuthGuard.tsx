@@ -5,8 +5,8 @@ import { Redirect, Route } from 'react-router-dom';
 import { IRouteAuth } from 'models/IRoute';
 
 const AuthGuard = ({ component: Component, isAuthenticated = false, ...rest }: IRouteAuth) => {
-  
-  if(!isAuthenticated) return <Redirect to={{ pathname: '/login' }} />
+
+  if (!isAuthenticated) return <Redirect to={{ pathname: '/login' }} />
 
   return <Route {...rest} component={Component} />;
 };
