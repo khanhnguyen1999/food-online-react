@@ -42,6 +42,7 @@ const Login = () => {
             size="large"
             color="primary"
             className={classes.loginBtn}
+            onClick={() => localStorage.setItem('token', 'eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDdasdsaadaHJ1ZX0')}
           >
             Login
           </Button>
