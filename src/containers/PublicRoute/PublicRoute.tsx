@@ -1,11 +1,14 @@
-import React, { createElement } from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import React from 'react'
+import { Redirect, Route } from 'react-router-dom';
 
-const PublicRoute = ({ component, isAuthenticated, ...rest }: any) => {
-  const routeComponent = (props: any) => (
-    isAuthenticated
-      ? createElement(component, props)
-      : <Redirect to={{ pathname: '/' }} />
-  );
-  return <Route {...rest} render={routeComponent} />;
+// types
+import { IRouteAuth } from 'models/IRoute';
+
+const PublicRoute = ({ component: Component, isAuthenticated = false, ...rest }: IRouteAuth) => {
+
+  if(isAuthenticated) return <Redirect to='/' />
+
+  return <Route {...rest} component={Component} />;
 };
+
+export default PublicRoute;
