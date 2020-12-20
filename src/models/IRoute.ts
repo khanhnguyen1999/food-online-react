@@ -7,5 +7,5 @@ export type IRouteAuth = {
   password: string,
   userid: number,
   token: any,
-  dispatch: any
+  user: any
 }
