@@ -1,5 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -9,15 +8,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 
 import useStyles from './style'
-
-//state type
-
-type State = {
-  username: string
-  password: string
-};
-
-
 
 const Login = () => {
   const classes = useStyles();
@@ -50,7 +40,7 @@ const Login = () => {
           <Button
             variant="contained"
             size="large"
-            color="secondary"
+            color="primary"
             className={classes.loginBtn}
           >
             Login

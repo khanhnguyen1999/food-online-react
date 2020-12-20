@@ -11,9 +11,9 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
-      margin: theme.spacing(1),
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
       // minWidth: 120,
-      width: 100
     },
     selectEmpty: {
       marginTop: theme.spacing(2),

@@ -73,27 +73,28 @@ const Register = () => {
               placeholder="Password"
               margin="normal"
             />
-            <RadioGroup aria-label="gender" name="gender1">
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-            </RadioGroup>
-            <FormControl className={classes.formControl}>
+            <FormControl className={classes.formControl} fullWidth>
               <InputLabel id="demo-simple-select-label">Language</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
+                fullWidth
               >
                 <MenuItem value={0}>Engligh</MenuItem>
                 <MenuItem value={1}>Vietnamese</MenuItem>
               </Select>
             </FormControl>
+            <RadioGroup aria-label="gender" name="gender1">
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+            </RadioGroup>
           </div>
         </CardContent>
         <CardActions>
           <Button
             variant="contained"
             size="large"
-            color="secondary"
+            color="primary"
             className={classes.loginBtn}
           >
             Register
