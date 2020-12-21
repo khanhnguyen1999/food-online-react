@@ -7,6 +7,7 @@
       "email": "test1@gmail.com",
       "gender": "male",
       "language": "Vietnamese",
+      "password": "123",
       "token": "eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDdasdsaadaHJ1ZX0"
     },
     {
@@ -16,6 +17,7 @@
       "email": "test2@gmail.com",
       "gender": "female",
       "language": "English",
+      "password": "checking",
       "token": "eyJpc3MiOiJ0b3B0YWwuY2sedqe12eqweqweqwedqwdqw2xhaW1zL2lzX2FkbWluIjp0cnVlLCJjb21wYW5dasdas"
     },
     {

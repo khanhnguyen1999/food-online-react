@@ -1,13 +1,11 @@
 import { apiService } from "./index";
 
-// types
-import { IUserInfo } from 'models/IRoute';
 
 const userService = {
-  getUserById({ userid }: IUserInfo) {
+  getUserById({ userid }: { userid: number }) {
     return apiService
       .callWithAuth()
-      .get(`/member/member.php?userid=${userid}`);
+      .get(`/users/userid=${userid}`);
   }
 }
 
