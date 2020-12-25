@@ -10,24 +10,22 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      width: 400,
-      margin: `${theme.spacing(0)} auto`
+    root: {
+      maxWidth: '450px',
+      display: 'block',
+      margin: '0 auto',
     },
-    loginBtn: {
-      marginTop: theme.spacing(2),
-      flexGrow: 1
+    textField: {
+      '& > *': {
+        width: '100%',
+      },
     },
-    header: {
-      textAlign: 'center',
-      background: '#212121',
-      color: '#fff'
+    submitButton: {
+      marginTop: '24px',
     },
-    card: {
-      marginTop: theme.spacing(10)
-    }
+    title: { textAlign: 'center' },
+    successMessage: { color: 'green' },
+    errorMessage: { color: 'red' },
   })
 );
 
