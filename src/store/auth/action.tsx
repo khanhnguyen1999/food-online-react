@@ -8,12 +8,6 @@ const nameSpace = 'auth:';
 export const LOGIN_SUCCESS = `${nameSpace}LOGIN_SUCCESS`;
 export const LOGOUT_SUCCESS = `${nameSpace}LOGOUT_SUCCESS`;
 
-type DATA = {
-  data: any
-}
-type EMAIL = {
-  email: string
-}
 
 type TOKEN = {
   token: string
@@ -38,28 +32,26 @@ type LoginDataType = {
   email: string,
 }
 
+
 export const asyncHandleLogin = (data: LoginDataType) => {
   return async (dispatch: Dispatch) => {
     try {
-      console.log("data ", data)
-      const response = await axios.get(`http://localhost:3000/user?email=${data.email}`)
-      console.log("res ", response)
-      if (response.data.status !== 200) {
+      const response: any = await axios.get(`http://localhost:3000/user?email=${data.email}`)
+      if (response.status !== 200) {
         return {
           ok: false,
           error: response.data.error
         }
       } else {
-        console.log("response ", response)
-        const user = response.data.user;
-        const token = response.data.token;
-        localStorage.setItem("token", token)
+        const user = response.data;
+        const token = response.data[0].token;
+        localStorage.setItem("token", response)
         dispatch(actLoginSuccess({ token }));
         dispatch(actSetUserInfor({ user }));
         return { ok: true }
       }
     } catch (err) {
-      return { ok: false, error: err.message }
+      return { ok: false, error: "Error. Please login again.." }
     }
   }
 }

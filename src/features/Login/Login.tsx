@@ -3,21 +3,20 @@ import {
   Grid,
   TextField,
   Button,
-  makeStyles,
-  createStyles,
-  Theme,
 } from '@material-ui/core'
 
+import { useToasts } from 'react-toast-notifications'
 import { asyncHandleLogin } from '../../store/auth/action'
+import { Redirect } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 
 import { Formik, Form, FormikProps } from 'formik'
 import * as Yup from 'yup'
 import useStyles from './style'
-import axios from 'axios'
+
 
 
 interface ISignUpForm {
@@ -48,47 +47,32 @@ const formStatusProps: IFormStatusProps = {
     type: 'error',
   },
 }
-type EMAIL = {
-  email: string
-}
 const Login: React.FunctionComponent = () => {
   const classes = useStyles()
+  const { addToast } = useToasts()
+  const history = useHistory()
   const [displayFormStatus, setDisplayFormStatus] = useState(false)
   const [formStatus, setFormStatus] = useState<IFormStatus>({
     message: '',
     type: '',
   })
   const dispatch = useDispatch()
-  const history = useHistory()
 
-  const createNewUser = async (data: ISignUpForm, resetForm: Function) => {
-    try {
-      console.log("data ", data)
-      const dataLogin = {
-        email: "abc@gmail.com"
-      }
-      dispatch(asyncHandleLogin(dataLogin))
-    } catch (error) {
-      const response = error.response
-      if (
-        response.data === 'user already exist' &&
-        response.status === 400
-      ) {
-        setFormStatus(formStatusProps.duplicate)
-      } else {
-        setFormStatus(formStatusProps.error)
-      }
-    } finally {
-      setDisplayFormStatus(true)
-    }
-  }
+  // useNotAuth()
+  const onSubmit = async (values: ISignUpForm) => {
 
-  const onSubmit = (values: ISignUpForm) => {
     try {
       const dataLogin = {
-        email: values.email
+        email: values.email,
       }
-      dispatch(asyncHandleLogin(dataLogin))
+      const response: any = await dispatch(asyncHandleLogin(dataLogin))
+      if (response.ok) {
+        console.log("res ", response.ok)
+        return history.push("/");
+      }
+      else {
+        addToast(response.error, { appearance: 'error' })
+      }
     } catch (error) {
       const response = error.response
       if (
@@ -130,7 +114,7 @@ const Login: React.FunctionComponent = () => {
           } = props
           return (
             <Form>
-              <h1 className={classes.title}>Sign up</h1>
+              <h1 className={classes.title}>Login</h1>
               <Grid
                 container
                 justify="space-around"
@@ -204,6 +188,7 @@ const Login: React.FunctionComponent = () => {
                   )}
                 </Grid>
               </Grid>
+              <Link to="/register">register here</Link>
             </Form>
           )
         }}

@@ -11,31 +11,36 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-      // minWidth: 120,
+      minWidth: 120,
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
-    container: {
+    form: {
+      display: "flex",
+      flexDirection: 'column'
+    },
+    formContainer: {
       display: 'flex',
-      flexWrap: 'wrap',
-      width: 400,
-      margin: `${theme.spacing(0)} auto`
+      justifyContent: 'center'
     },
-    loginBtn: {
-      marginTop: theme.spacing(2),
-      flexGrow: 1
+    submitButton: {
+      width: '90px',
+      height: '50px'
     },
-    header: {
-      textAlign: 'center',
-      background: '#212121',
-      color: '#fff'
+    root: {
+      maxWidth: '450px',
+      display: 'block',
+      margin: '0 auto',
     },
-    card: {
-      marginTop: theme.spacing(10)
-    }
+    textField: {
+      '& > *': {
+        width: '100%',
+      },
+    },
+    title: { textAlign: 'center' },
+    successMessage: { color: 'green' },
+    errorMessage: { color: 'red' },
   })
 );
 

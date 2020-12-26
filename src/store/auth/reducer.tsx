@@ -7,6 +7,7 @@ const initState = {
 export default function AuthReducer(state = initState, action: Action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
+      console.log("token ", action.payload)
       return {
         ...state,
         ACCESS_TOKEN: action.payload
