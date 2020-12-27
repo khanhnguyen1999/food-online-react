@@ -32,7 +32,7 @@ type LoginDataType = {
 export const asyncHandleLogin = (data: LoginDataType) => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await httpRequest.get(`http://localhost:3000/user?email=${data.email}`);
+      const response = await httpRequest.get(`/user?email=${data.email}`);
       if (response.data.length === 0) {
         return {
           ok: false,
