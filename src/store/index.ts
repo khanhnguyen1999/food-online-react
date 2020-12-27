@@ -1,16 +1,15 @@
-import { createStore, applyMiddleware } from 'redux'
-import FoodOnline from './rootReducers'
-// import logger from 'redux-logger'
 import thunk from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer from "./rootReducers";
 
-const store = createStore(
-  FoodOnline,
-  applyMiddleware(thunk),
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-)
 
-store.subscribe(() => {
-  console.log("Get state", store.getState())
-})
+const Store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
-export default store
+
+export {
+  Store
+};

@@ -1,23 +1,22 @@
-import { authService } from "../../services";
+
+import axios from 'axios'
+import { actSetUserInfor } from "../user/action";
 import { Dispatch } from 'redux';
-// import { actSetUserInfor } from "../user/actions";
-// import { actShowLoading, actHideLoading } from "../app/actions";
-
-
-// types
-import { IRouteAuth } from 'models/IRoute';
 
 const nameSpace = 'auth:';
 
 export const LOGIN_SUCCESS = `${nameSpace}LOGIN_SUCCESS`;
 export const LOGOUT_SUCCESS = `${nameSpace}LOGOUT_SUCCESS`;
 
-export const actLoginSuccess = (values: { token: string }) => {
+
+type TOKEN = {
+  token: string
+}
+
+export const actLoginSuccess = ({ token }: TOKEN) => {
   return {
     type: LOGIN_SUCCESS,
-    payload: {
-      token: values.token
-    }
+    payload: token
   }
 }
 
@@ -29,37 +28,31 @@ export const actLogoutSuccess = () => {
   }
 }
 
-type UserloginData = {
+type LoginDataType = {
   email: string,
 }
-// types
-// import { IUserInfo } from 'models/IRoute';
 
-// asyncHandleLogin là một function return về một function khác ???
-export const asyncHandleLogin = (values: UserloginData) => {
+
+export const asyncHandleLogin = (data: LoginDataType) => {
   return async (dispatch: Dispatch) => {
     try {
-      // dispatch(actShowLoading());
-      const response = await authService.login({ email: values.email });
-      // dispatch(actHideLoading());
-
-      if (response.data.status !== 200) {
+      const response: any = await axios.get(`http://localhost:3000/user?email=${data.email}`)
+      if (response.status !== 200) {
         return {
           ok: false,
           error: response.data.error
         }
       } else {
-        // const user = response.data.user;
-        const token = response.data.token;
-        console.log("token ", token)
-        // localStorage.setItem("token", JSON.stringify(token))
-        // dispatch(actLoginSuccess({ token }));
-        // dispatch(actSetUserInfor({ user }));
+        console.log("response ", response.data[0].token)
+        const user = response.data;
+        const token = response.data[0].token;
+        localStorage.setItem("token", token)
+        dispatch(actLoginSuccess({ token }));
+        dispatch(actSetUserInfor({ user }));
         return { ok: true }
       }
     } catch (err) {
-      // dispatch(actHideLoading());
-      return { ok: false, error: err.message }
+      return { ok: false, error: "Error. Please login again.." }
     }
   }
 }

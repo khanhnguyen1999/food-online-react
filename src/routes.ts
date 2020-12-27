@@ -5,7 +5,7 @@ import { lazy } from 'react';
 const Home = lazy(() => import('features/Home'));
 const About = lazy(() => import('features/About'));
 const Register = lazy(() => import('features/Register'))
-const Login = lazy(() => import('features/Login'))
+const Login = lazy(() => import('features/Login/Login'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home', component: Home },

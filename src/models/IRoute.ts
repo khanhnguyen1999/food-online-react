@@ -4,3 +4,5 @@ export type IRouteAuth = {
   exact?: boolean,
   path: string
 }
+
+export type Action = { type: string, payload: any }

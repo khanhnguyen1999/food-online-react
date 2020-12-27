@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
 
-import UserReducer from './user/reducer'
-import AuthReducer from './auth/reducer'
+import UserReducer from "./user/reducer";
+import AuthReducer from "./auth/reducer";
 
 const FoodOnline = combineReducers({
-  User: UserReducer,
-  Auth: AuthReducer
+  user: UserReducer,
+  auth: AuthReducer,
 })
-export default FoodOnline
+
+export default FoodOnline;

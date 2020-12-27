@@ -1,16 +1,18 @@
 import { SET_USER_INFOR } from "./action";
 import { LOGOUT_SUCCESS } from "../auth/action";
+import { Action } from '../../models/IRoute'
+import { IUserState } from 'models/IRootState';
 
-const initState = {
-  currentUser: null,
-  hashUserData: {},
+const initState: IUserState = {
+  currentUser: null
 }
-export default function UserReducer(state = initState, action: any) {
+
+export default function UserReducer(state = initState, action: Action) {
   switch (action.type) {
     case SET_USER_INFOR:
       return {
         ...state,
-        currentUser: action.payload.user
+        currentUser: action.payload
       };
     case LOGOUT_SUCCESS:
       return {

@@ -1,3 +1,7 @@
 import { createSelector } from 'reselect';
+import IRootState from 'models/IRootState';
 
-export const userSelector = (state: any) => state.User;
+export const currentUserSelector = createSelector(
+  (state: IRootState) => state.user,
+  (user) => user.currentUser
+)

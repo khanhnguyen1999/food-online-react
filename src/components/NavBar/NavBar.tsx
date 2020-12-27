@@ -43,14 +43,6 @@ function NavBar() {
           <ListItemIcon><MailIcon /></ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
-        <ListItem button onClick={_handleNavigate('/login')}>
-          <ListItemIcon><MailIcon /></ListItemIcon>
-          <ListItemText primary="Login" />
-        </ListItem>
-        <ListItem button onClick={_handleNavigate('/register')}>
-          <ListItemIcon><MailIcon /></ListItemIcon>
-          <ListItemText primary="Register" />
-        </ListItem>
       </List>
     </div>
   );
