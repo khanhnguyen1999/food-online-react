@@ -23,11 +23,14 @@ import Select from '@material-ui/core/Select';
 
 import { useHistory } from 'react-router-dom'
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { currentUserSelector } from "selectors/user.selector";
+
+import { actLogoutSuccess } from 'store/auth/action'
 // styles
 import useStyles from './style';
+import { authService } from 'services';
 
 
 function Header() {
@@ -35,6 +38,7 @@ function Header() {
   const theme = useTheme();
   const classes = useStyles();
   const history = useHistory()
+  const dispatch = useDispatch()
   const userData = useSelector(currentUserSelector)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -55,8 +59,9 @@ function Header() {
     handleMobileMenuClose();
   };
   const handleLogOut = () => {
-    localStorage.removeItem("token")
-    return history.push("/login")
+    authService.logOut();
+    dispatch(actLogoutSuccess())
+    history.push("/login")
   }
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {

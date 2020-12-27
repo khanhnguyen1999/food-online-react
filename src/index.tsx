@@ -9,6 +9,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import './index.css';
 import App from './App';
 
+import { initRequest } from 'services';
+
+initRequest(Store);
+
 const theme = createMuiTheme({
   palette: {
     type: "dark",

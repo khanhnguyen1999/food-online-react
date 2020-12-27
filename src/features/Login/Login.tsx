@@ -17,6 +17,10 @@ import * as Yup from 'yup'
 
 import useStyles from './style'
 
+import { actLoginSuccess } from 'store/auth/action';
+
+import { authService } from 'services';
+
 interface ISignUpForm {
   email: string,
 }
@@ -59,32 +63,18 @@ const Login: React.FunctionComponent = () => {
   
   // useNotAuth()
   const onSubmit = async (values: ISignUpForm) => {
-
-    try {
-      const dataLogin = {
-        email: values.email,
-      }
-      const response: any = await dispatch(asyncHandleLogin(dataLogin))
-      if (response.ok) {
-        console.log("res ", response.ok)
-        return history.push("/");
-      }
-      else {
-        addToast(response.error, { appearance: 'error' })
-      }
-    } catch (error) {
-      const response = error.response
-      if (
-        response.data === 'user already exist' &&
-        response.status === 400
-      ) {
-        setFormStatus(formStatusProps.duplicate)
-      } else {
-        setFormStatus(formStatusProps.error)
-      }
-    } finally {
-      setDisplayFormStatus(true)
+    const dataLogin = {
+      email: values.email,
     }
+    const res: any = await dispatch(asyncHandleLogin(dataLogin));
+
+    if(!res.ok) {
+      addToast(res.res, { appearance: 'error' })
+      return;
+    }
+    authService.setSession(res.res)
+
+    dispatch(actLoginSuccess(res.res))
   }
 
   return (
@@ -159,7 +149,6 @@ const Login: React.FunctionComponent = () => {
                     type="submit"
                     variant="contained"
                     color="secondary"
-                    disabled={isSubmitting}
                   >
                     Submit
                                     </Button>

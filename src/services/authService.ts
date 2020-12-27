@@ -1,14 +1,52 @@
-import { apiService } from "./index";
+class AuthService {
+  handleAuthentication = () => {
+    const acccessToken = this.getAccessToken();
 
-// types
+    if (!acccessToken || !this.isValidToken(acccessToken)) return;
 
-const authService = {
-  // login({ email, password }: IUserInfo) {
-  login({ email }: { email: string }) {
-    return apiService
-      .call()
-      .get(`/users?email=${email}`);
-  }
+    this.setSession(acccessToken);
+  };
+
+  loginWithAuth0 = async (username: string) => {
+    const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+    this.setSession(accessToken);
+    return {
+      user: username,
+    };
+  };
+
+  loginWithToken = async () => {
+    return {
+      user: 'tonynguyen',
+    };
+  };
+
+  setSession = (accessToken: string | null) => {
+    if (!accessToken) {
+      localStorage.removeItem('accessToken');
+      return;
+    }
+    localStorage.setItem('accessToken', accessToken);
+  };
+
+  logOut = () => {
+    this.setSession(null);
+  };
+
+  getAccessToken = () => localStorage.getItem('accessToken');
+
+  isAuthenticated = () => !!this.getAccessToken();
+
+  isValidToken = (accessToken: string | null) => {
+    const expireTime = 1606275140.897;
+    if (!accessToken) return false;
+
+    const currentTime = Date.now() / 1000;
+
+    return expireTime < currentTime;
+  };
 }
+
+const authService = new AuthService();
 
 export default authService;

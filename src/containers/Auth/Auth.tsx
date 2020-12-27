@@ -1,19 +1,35 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { authService } from 'services';
+
+import { actLoginSuccess } from 'store/auth/action';
+import { actSetUserInfor } from 'store/user/action';
+
+import {fetchUserData } from 'apis/user.api';
 
 type IProps = {
   children: any
 }
 
 const Auth  = ({ children }: IProps) => {
-  const token = localStorage.getItem('token');
-
-  console.log('token: ', token);
+  const dispatch = useDispatch();
+  const token = authService.getAccessToken();
 
   useEffect(() => {
     if(!token) return;
-    
+    dispatch(actLoginSuccess(token));
 
-  }, [])
+    async function fetchUser()  {
+      const res = await fetchUserData(`/user?token=${token}`);
+      dispatch(actSetUserInfor({
+        user: res.data[0]
+      }))
+    }
+
+    fetchUser();
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return children
 }

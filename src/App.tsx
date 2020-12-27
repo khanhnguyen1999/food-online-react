@@ -17,6 +17,7 @@ import Register from 'features/Register';
 
 import { useSelector } from 'react-redux';
 import { accessTokenSelector } from 'selectors/auth.selector';
+import { authService } from 'services';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,7 +29,7 @@ const useStyles = makeStyles(() =>
 
 export default function App() {
   const classes = useStyles();
-  const accessToken = useSelector(accessTokenSelector)
+  const accessToken = useSelector(accessTokenSelector) || authService.getAccessToken();
   
   return (
     <div className={classes.root}>

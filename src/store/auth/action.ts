@@ -3,17 +3,15 @@ import axios from 'axios'
 import { actSetUserInfor } from "../user/action";
 import { Dispatch } from 'redux';
 
+import { httpRequest, authService } from 'services';
+
 const nameSpace = 'auth:';
 
 export const LOGIN_SUCCESS = `${nameSpace}LOGIN_SUCCESS`;
 export const LOGOUT_SUCCESS = `${nameSpace}LOGOUT_SUCCESS`;
+export const SET_USER_DATA = `${nameSpace}SET_USER_DATA`;
 
-
-type TOKEN = {
-  token: string
-}
-
-export const actLoginSuccess = ({ token }: TOKEN) => {
+export const actLoginSuccess = (token: string) => {
   return {
     type: LOGIN_SUCCESS,
     payload: token
@@ -21,7 +19,6 @@ export const actLoginSuccess = ({ token }: TOKEN) => {
 }
 
 export const actLogoutSuccess = () => {
-  localStorage.removeItem("token")
   return {
     type: LOGOUT_SUCCESS,
     payload: {}
@@ -32,27 +29,32 @@ type LoginDataType = {
   email: string,
 }
 
-
 export const asyncHandleLogin = (data: LoginDataType) => {
   return async (dispatch: Dispatch) => {
     try {
-      const response: any = await axios.get(`http://localhost:3000/user?email=${data.email}`)
-      if (response.status !== 200) {
+      const response = await httpRequest.get(`http://localhost:3000/user?email=${data.email}`);
+      if (response.data.length === 0) {
         return {
           ok: false,
-          error: response.data.error
+          res: 'Email not found'
         }
-      } else {
-        console.log("response ", response.data[0].token)
-        const user = response.data;
-        const token = response.data[0].token;
-        localStorage.setItem("token", token)
-        dispatch(actLoginSuccess({ token }));
-        dispatch(actSetUserInfor({ user }));
-        return { ok: true }
+      } 
+
+      const { token } = response.data[0];
+      return {
+        ok: true,
+        res: token
       }
     } catch (err) {
-      return { ok: false, error: "Error. Please login again.." }
+      return { ok: false, res: "Error. Please login again.." }
     }
   }
 }
+export const logout = () => (dispatch: Dispatch<any>) => {
+  authService.logOut();
+  dispatch({ type: LOGOUT_SUCCESS });
+};
+
+export const setUserData = (user: any) => (dispatch: Dispatch<any>) => {
+  dispatch({ type: SET_USER_DATA, payload: user });
+};

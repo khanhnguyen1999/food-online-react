@@ -1,3 +1,12 @@
+export type IAppState = {
+  isLoading: boolean;
+  dialog: {
+    type: 'error' | 'success',
+    isShow: boolean,
+    content: string,
+  },
+}
+
 export type IAuthState = {
   ACCESS_TOKEN: string
 }
@@ -18,6 +27,7 @@ export type IUserState = {
 }
 
 type IRootState = {
+  app: IAppState;
   user: IUserState;
   auth: IAuthState;
 };
