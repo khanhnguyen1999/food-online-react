@@ -43,9 +43,10 @@ export const asyncHandleLogin = (data: LoginDataType) => {
           error: response.data.error
         }
       } else {
+        console.log("response ", response.data[0].token)
         const user = response.data;
         const token = response.data[0].token;
-        localStorage.setItem("token", response)
+        localStorage.setItem("token", token)
         dispatch(actLoginSuccess({ token }));
         dispatch(actSetUserInfor({ user }));
         return { ok: true }
