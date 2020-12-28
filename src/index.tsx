@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import { Store } from 'store/index'
 import { ToastProvider } from 'react-toast-notifications'
 import { Provider } from 'react-redux'
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import ThemeProvider from './components/Header/react-material-ui-dark-mode';
+import { createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './index.css';
 import App from './App';

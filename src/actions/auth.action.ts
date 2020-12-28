@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import { actSetUserInfor } from "../user/action";
+import { actSetUserInfor } from "./user.action";
 import { Dispatch } from 'redux';
 
 import { httpRequest, authService } from 'services';
@@ -38,7 +38,7 @@ export const asyncHandleLogin = (data: LoginDataType) => {
           ok: false,
           res: 'Email not found'
         }
-      } 
+      }
 
       const { token } = response.data[0];
       return {

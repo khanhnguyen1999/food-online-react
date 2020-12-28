@@ -1,5 +1,5 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "./action";
-import { Action } from '../../models/IRoute'
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../actions/auth.action";
+import { Action } from '../models/IRoute'
 import { IAuthState } from 'models/IRootState';
 
 const initState: IAuthState = {

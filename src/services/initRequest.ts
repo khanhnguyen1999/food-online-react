@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 
 // actions
-import { setLoading, setDialog } from 'store/app/action';
+import { setLoading, setDialog } from 'actions/app.action';
 
 export type IConfig = AxiosRequestConfig & {
   showSpinner?: boolean;
@@ -64,12 +64,12 @@ export default function initRequest(store: any) {
         store.dispatch(setDialog(true));
       }
 
-      switch(error.response?.status) {
+      switch (error.response?.status) {
         case 404: {
           console.log('show dialog 404');
           break
         }
-        default: 
+        default:
           return Promise.reject(error);
       }
       return Promise.reject(error);

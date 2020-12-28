@@ -7,7 +7,7 @@ import {
 
 // redux 
 import { useDispatch } from 'react-redux'
-import { asyncHandleLogin } from 'store/auth/action'
+import { asyncHandleLogin } from 'actions/auth.action'
 import { useToasts } from 'react-toast-notifications'
 import { useHistory, Link } from 'react-router-dom'
 
@@ -17,7 +17,7 @@ import * as Yup from 'yup'
 
 import useStyles from './style'
 
-import { actLoginSuccess } from 'store/auth/action';
+import { actLoginSuccess } from 'actions/auth.action';
 
 import { authService } from 'services';
 
@@ -60,7 +60,7 @@ const Login: React.FunctionComponent = () => {
   })
   const dispatch = useDispatch()
 
-  
+
   // useNotAuth()
   const onSubmit = async (values: ISignUpForm) => {
     const dataLogin = {
@@ -68,7 +68,7 @@ const Login: React.FunctionComponent = () => {
     }
     const res: any = await dispatch(asyncHandleLogin(dataLogin));
 
-    if(!res.ok) {
+    if (!res.ok) {
       addToast(res.res, { appearance: 'error' })
       return;
     }

@@ -2,24 +2,24 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { authService } from 'services';
 
-import { actLoginSuccess } from 'store/auth/action';
-import { actSetUserInfor } from 'store/user/action';
+import { actLoginSuccess } from 'actions/auth.action';
+import { actSetUserInfor } from 'actions/user.action';
 
-import {fetchUserData } from 'apis/user.api';
+import { fetchUserData } from 'apis/user.api';
 
 type IProps = {
   children: any
 }
 
-const Auth  = ({ children }: IProps) => {
+const Auth = ({ children }: IProps) => {
   const dispatch = useDispatch();
   const token = authService.getAccessToken();
 
   useEffect(() => {
-    if(!token) return;
+    if (!token) return;
     dispatch(actLoginSuccess(token));
 
-    async function fetchUser()  {
+    async function fetchUser() {
       const res = await fetchUserData(`/user?token=${token}`);
       dispatch(actSetUserInfor({
         user: res.data[0]
@@ -27,9 +27,9 @@ const Auth  = ({ children }: IProps) => {
     }
 
     fetchUser();
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return children
 }

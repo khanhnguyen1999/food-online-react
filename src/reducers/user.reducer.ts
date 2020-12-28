@@ -1,6 +1,6 @@
-import { SET_USER_INFOR } from "./action";
-import { LOGOUT_SUCCESS } from "../auth/action";
-import { Action } from '../../models/IRoute'
+import { SET_USER_INFOR } from "../actions/user.action";
+import { LOGOUT_SUCCESS } from "../actions/auth.action";
+import { Action } from '../models/IRoute'
 import { IUserState } from 'models/IRootState';
 
 const initState: IUserState = {

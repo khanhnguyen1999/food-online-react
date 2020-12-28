@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 // material core
 import AppBar from '@material-ui/core/AppBar';
@@ -27,15 +28,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { currentUserSelector } from "selectors/user.selector";
 
-import { actLogoutSuccess } from 'store/auth/action'
+import { actLogoutSuccess } from 'actions/auth.action'
 // styles
 import useStyles from './style';
 import { authService } from 'services';
 
 
 function Header() {
-  const changeTheme = useChangeTheme();
-  const theme = useTheme();
   const classes = useStyles();
   const history = useHistory()
   const dispatch = useDispatch()
@@ -67,6 +66,9 @@ function Header() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const theme = useTheme();
+  const changeTheme = useChangeTheme();
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -134,6 +136,14 @@ function Header() {
     setLanguage(event.target.value as string);
   };
 
+
+  // dark mode 
+
+  // useEffect(() => {
+  //   onChangeHandle(darkMode.value);
+  // });
+
+
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
@@ -146,7 +156,7 @@ function Header() {
           <MenuIcon />
         </IconButton>
         <Typography className={classes.title} variant="h6" noWrap>
-          Material-UI
+          Food Online
           </Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>

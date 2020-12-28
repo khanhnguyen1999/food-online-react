@@ -23,7 +23,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import randomstring from 'randomstring'
 
-import { asyncHandleRegister } from '../../store/user/action'
+import { asyncHandleRegister } from '../../actions/user.action'
 
 
 interface ISignUpForm {

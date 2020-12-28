@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 
-import UserReducer from "./user/reducer";
-import AuthReducer from "./auth/reducer";
-import AppReducer from './app/reducer';
+import UserReducer from "../reducers/user.reducer";
+import AuthReducer from "../reducers/auth.reducer";
+import AppReducer from '../reducers/app.reducer';
 
 const FoodOnline = combineReducers({
   user: UserReducer,

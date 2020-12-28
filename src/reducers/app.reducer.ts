@@ -1,7 +1,7 @@
 import { IAppState } from 'models/IRootState';
 
 import { Action } from 'models/IRoute';
-import { SET_LOADING, SET_DIALOG } from './action';
+import { SET_LOADING, SET_DIALOG } from '../actions/app.action';
 
 const initialState: IAppState = {
   isLoading: false,
