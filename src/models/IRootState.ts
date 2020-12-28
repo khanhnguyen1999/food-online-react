@@ -21,7 +21,17 @@ type IUserData = {
   password: string;
   token: string;
 }
-
+type IFoodData = {
+  id: number,
+  name: string,
+  price: number,
+  quantity: number,
+  url: string
+}
+export type IFoodState = {
+  listfood: IFoodData | null,
+  food: IFoodData | null
+}
 export type IUserState = {
   currentUser: IUserData | null
 }
@@ -30,6 +40,7 @@ type IRootState = {
   app: IAppState;
   user: IUserState;
   auth: IAuthState;
+  food: IFoodState
 };
 
 export default IRootState;

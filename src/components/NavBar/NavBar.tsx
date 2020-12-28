@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // material core
@@ -9,18 +9,27 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 
 // material icon
 import MailIcon from '@material-ui/icons/Mail';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
+import { useDispatch, useSelector } from 'react-redux'
+import { asyncFetchFoodData } from '../../actions/food.action'
 // styles
 import useStyles from './style';
 
 function NavBar() {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch()
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // fetch data food
+  useEffect(() => {
+    const response: any = dispatch(asyncFetchFoodData())
+  }, [])
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -42,6 +51,10 @@ function NavBar() {
         <ListItem button onClick={_handleNavigate('/about')}>
           <ListItemIcon><MailIcon /></ListItemIcon>
           <ListItemText primary="About" />
+        </ListItem>
+        <ListItem button onClick={_handleNavigate('/foods')}>
+          <ListItemIcon><FastfoodIcon /></ListItemIcon>
+          <ListItemText primary="Foods" />
         </ListItem>
       </List>
     </div>
@@ -75,6 +88,7 @@ function NavBar() {
           {drawer}
         </Drawer>
       </Hidden>
+
     </nav>
   )
 }

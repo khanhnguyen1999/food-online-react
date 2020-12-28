@@ -4,15 +4,15 @@ import { lazy } from 'react';
 // containers
 const Home = lazy(() => import('features/Home'));
 const About = lazy(() => import('features/About'));
-const Register = lazy(() => import('features/Register'))
-const Login = lazy(() => import('features/Login/Login'))
+const Foods = lazy(() => import('features/Foods'))
+const FoodDetail = lazy(() => import('features/FoodDetail'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home', component: Home },
   { path: '/home', name: 'Dashboard Page', component: Home },
   { path: '/about', name: 'Slider Image', component: About },
-  { path: '/login', name: 'Login Page', component: Login },
-  { path: '/register', name: 'Register Page', component: Register }
+  { path: '/foods', name: 'Food Online Page', component: Foods },
+  { path: '/foodsdetail/:id', name: 'Food Detail Online Page', component: FoodDetail },
 ];
 
 export default routes;
