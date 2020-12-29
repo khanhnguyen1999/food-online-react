@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // material core
@@ -15,21 +15,13 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import MailIcon from '@material-ui/icons/Mail';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
-import { useDispatch, useSelector } from 'react-redux'
-import { asyncFetchFoodData } from '../../actions/food.action'
 // styles
 import useStyles from './style';
 
 function NavBar() {
   const classes = useStyles();
   const history = useHistory();
-  const dispatch = useDispatch()
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  // fetch data food
-  useEffect(() => {
-    const response: any = dispatch(asyncFetchFoodData())
-  }, [])
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

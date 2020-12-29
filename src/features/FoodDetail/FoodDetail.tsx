@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 // redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setDialog } from 'selectors/app.selector'
-import { fooddetailSelector, listfoodSelector } from 'selectors/food.selector'
+import { fooddetailSelector } from 'selectors/food.selector'
 import { asyncFetchFoodDetailData, actNewFoodDataUpdate } from '../../actions/food.action'
 import { actSetDialog } from 'actions/app.action'
 

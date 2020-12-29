@@ -1,6 +1,3 @@
-
-import axios from 'axios'
-import { actSetUserInfor } from "./user.action";
 import { Dispatch } from 'redux';
 
 import { httpRequest, authService } from 'services';

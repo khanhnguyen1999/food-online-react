@@ -29,7 +29,7 @@ const Auth = ({ children }: IProps) => {
     fetchUser();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [token])
 
   return children
 }

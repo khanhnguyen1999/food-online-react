@@ -1,9 +1,6 @@
-import axios from 'axios'
 import { Dispatch } from 'redux'
-import { actLoginSuccess } from './auth.action'
 
-
-import { httpRequest, authService } from 'services';
+import { httpRequest } from 'services';
 
 const nameSpace = 'food:';
 
@@ -23,14 +20,6 @@ type UPDATE_FOOD = {
   id: number
 }
 
-type RegisterDataType = {
-  email: string,
-  firstname: string,
-  lastname: string,
-  gender: string,
-  language: string,
-  token: string
-}
 
 // food update 
 export const actNewFoodDataUpdate = (id: number, data: any) => ({

@@ -8,8 +8,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { listfoodSelector } from '../../selectors/food.selector'
+import { asyncFetchFoodData } from 'actions/food.action'
 
 import { TablePagination } from '@material-ui/core';
 import TablePaginationActions from './TablePaginationActions'
@@ -21,27 +22,12 @@ import {
   FormControl,
   InputAdornment,
   TextField,
-  createStyles,
   Button,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 
 import { Link } from 'react-router-dom'
-
-
-// const useStyles2 = makeStyles(theme => ({
-//   root: {
-//     width: "100%",
-//     marginTop: theme.spacing(3)
-//   },
-//   table: {
-//     minWidth: 500
-//   },
-//   tableWrapper: {
-//     overflowX: "auto"
-//   }
-// }));
 
 
 function Foods() {
@@ -72,12 +58,17 @@ function Foods() {
   const [searchData, setSearchData] = useState("")
   const [filter, setFilter] = useState([])
   const [data, setData] = useState([])
+  const dispatch = useDispatch()
+
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchData(event.target.value)
     setShowClearIcon(event.target.value === "" ? "none" : "flex");
   };
 
+  useEffect(() => {
+    dispatch(asyncFetchFoodData())
+  }, [dispatch])
   useEffect(() => {
     const fk_data = rows && rows.sort((a: any, b: any) => a.id < b.id ? -1 : 1)
     setData(fk_data)
@@ -91,18 +82,6 @@ function Foods() {
     setData(dataFilter)
   }, [searchData])
 
-  // export csv
-  const headers: any = [
-    { label: "First Name", key: "firstname" },
-    { label: "Last Name", key: "lastname" },
-    { label: "Email", key: "email" }
-  ];
-  const csvReport: any = {
-    headers: headers,
-    data: rows && rows,
-    filename: 'FoodOnline.csv'
-  };
-
   // pagination table 
 
   const defaultRowsPerPageOption = 5
@@ -113,7 +92,7 @@ function Foods() {
     defaultRowsPerPageOption || rowsPerPageOptions[0]
   );
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, data && data.length - page * rowsPerPage);
 
   function handleChangePage(event: any, newPage: number) {
     setPage(newPage);
@@ -189,7 +168,7 @@ function Foods() {
                 <TablePagination
                   rowsPerPageOptions={rowsPerPageOptions}
                   colSpan={3}
-                  count={data.length}
+                  count={data && data.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{

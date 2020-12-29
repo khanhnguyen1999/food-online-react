@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { Dispatch } from 'redux'
-import { actLoginSuccess } from './auth.action'
 
 const nameSpace = 'user:';
 
