@@ -29,36 +29,42 @@ const DialogComponent = () => {
     dispatch(actSetDialog(isShow, type, content))
   }
 
-  const _handleUpdate = () => {
+  const _handleUpdate = async () => {
     const isShow = false
     const content = dialog.content
     const type = ""
-    dispatch(asyncUpdateFood(foodId, newData))
-    dispatch(actSetDialog(isShow, type, content))
+    console.log('asyncUpdateFood', newData)
+    dispatch(asyncUpdateFood({
+      food: newData, cb: () => { console.log(1234123) },
+    }))
+    // console.log("Response ", response)
+    // dispatch(actSetDialog(isShow, type, content))
   }
 
   return (
-    <Dialog
-      open={dialog.isShow}
-      // onClose={handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-    >
-      {/* <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle> */}
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          {dialog.content}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={_handleCancel} variant="contained" color="secondary">
-          Cancel
+    <>
+      {dialog.isShow && <Dialog
+        open={true}
+        // onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        {/* <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle> */}
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {dialog.content}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={_handleCancel} variant="contained" color="secondary">
+            Cancel
           </Button>
-        <Button onClick={_handleUpdate} variant="contained" color="primary">
-          Update
+          <Button onClick={_handleUpdate} variant="contained" color="primary">
+            Update
           </Button>
-      </DialogActions>
-    </Dialog >
+        </DialogActions>
+      </Dialog >}
+    </>
   )
 }
 export default DialogComponent

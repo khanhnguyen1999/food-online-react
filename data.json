@@ -79,8 +79,8 @@
     {
       "id": 0,
       "name": "Chicken",
-      "price": "31",
-      "quantity": "32",
+      "price": "21",
+      "quantity": "39",
       "url": "https://diethood.com/wp-content/uploads/2019/07/Whole-Roast-Chicken.jpg"
     },
     {
@@ -101,8 +101,8 @@
       "id": 4,
       "name": "Soup",
       "price": 3,
-      "quantity": 9,
-      "url": "https://media-cdn.tripadvisor.com/media/photo-s/12/27/f6/07/soup-restaurant-chicken.jpg"
+      "quantity": "10",
+      "url": "https://miro.medium.com/max/2880/1*T0kjwacFHNZ_p8AC2lv-iA.jpeg"
     },
     {
       "name": "check",

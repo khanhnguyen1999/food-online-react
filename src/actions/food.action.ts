@@ -1,13 +1,15 @@
 import { Dispatch } from 'redux'
 
 import { httpRequest } from 'services';
+import { actSetDialog } from './app.action';
 
 const nameSpace = 'food:';
 
 export const FETCH_ALL_DATA_FOODS = `${nameSpace}FETCH_ALL_DATA_FOODS`
 export const GET_FOOD_DETAIL_BY_ID = `${nameSpace}GET_FOOD_DETAIL_BY_ID`
 export const GET_NEW_DATA_FOOD_UPDATE = `${nameSpace}GET_NEW_DATA_FOOD_UPDATE`
-export const UPDATE_FOOD_DETAIL = `${nameSpace}UPDATE_FOOD_DETAIL`
+export const UPDATE_FOOD_DETAIL_SUCCESS = `${nameSpace}UPDATE_FOOD_DETAIL_SUCCESS`
+export const UPDATE_FOOD_DETAIL_FAIL = `${nameSpace}UPDATE_FOOD_DETAIL_FAIL`
 
 type FOODS = {
   foods: any
@@ -69,7 +71,7 @@ export const actGetFoodDetailData = ({ food }: FOOD) => ({
 export const asyncFetchFoodDetailData = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await httpRequest.get(`/foods?id=${id}`);
+      const response = await httpRequest.get(`/foods/${id}`);
       if (response.data.length === 0) {
         return {
           ok: false,
@@ -88,35 +90,37 @@ export const asyncFetchFoodDetailData = (id: string) => {
   }
 }
 
-
 // update food 
-export const actUpdateFood = ({ id, food }: UPDATE_FOOD) => ({
-  type: UPDATE_FOOD_DETAIL,
+export const actUpdateFoodSucess = (food: any) => ({
+  type: UPDATE_FOOD_DETAIL_SUCCESS,
   payload: {
     food,
-    id
   }
 })
 
-export const asyncUpdateFood = (id: number, newData: any) => {
-  return async (dispatch: Dispatch) => {
+export const actUpdateFoodFail = (error: string) => ({
+  type: UPDATE_FOOD_DETAIL_FAIL,
+  payload: {
+    error,
+  }
+})
+
+export const asyncUpdateFood = ({
+  food, cb,
+}: any) => {
+  return async (dispatch: Dispatch<any>) => {
     try {
-      const response = await httpRequest.put(`/foods/${id}`, JSON.stringify(newData[0]));
-      if (response.data.length === 0) {
-        return {
-          ok: false,
-          res: 'Food not found'
-        }
+      const response = await httpRequest.put(`/foods/${food.id}`, JSON.stringify(food));
+      if (response.data === {}) {
+        throw new Error('Update food fail')
       }
-      const food = response.data;
-      dispatch(actUpdateFood({ id, food }))
-      return {
-        ok: true,
-        res: food
-      }
+      const result = response.data;
+      dispatch(actUpdateFoodSucess(result));
     }
     catch (err) {
-      return { ok: false, res: "Error. Please try again.." }
+      dispatch(actUpdateFoodFail(err.message));
+      // cb();
     }
+    dispatch(actSetDialog(false, "", ""))
   }
 }

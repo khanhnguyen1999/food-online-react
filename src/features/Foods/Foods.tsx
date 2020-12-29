@@ -185,6 +185,7 @@ function Foods() {
         </TableContainer>
       </Paper>
       <CsvDownloader
+        className="btn-download-csv"
         filename="FOODS_ONLINE"
         separator=";"
         wrapColumnChar="'"

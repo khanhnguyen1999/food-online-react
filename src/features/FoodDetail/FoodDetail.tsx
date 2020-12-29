@@ -25,7 +25,7 @@ function FoodDetail() {
   const [disabled, setDisabled] = useState(true)
   const food: any = useSelector(fooddetailSelector)
   const [data, setData] = useState({})
-  const [foodData, setFoodData] = useState([])
+  const [foodData, setFoodData] = useState(null)
 
   // fetch all data foods 
   useEffect(() => {
@@ -59,9 +59,9 @@ function FoodDetail() {
     return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
   }
   const _handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fakeData: any = [...foodData]
-    fakeData[0] = {
-      ...fakeData[0],
+    let fakeData: any = foodData;
+    fakeData = {
+      ...fakeData,
       [e.target.name]: e.target.value
     }
     setData(fakeData)
@@ -69,8 +69,8 @@ function FoodDetail() {
   return (
     <>
       {
-        food && food.map((item: any) => (
-          <FormControl key={item.id}>
+        food && (
+          <FormControl key={food.id}>
             <div>
               <span>Name:</span> <span>
                 <TextField
@@ -78,7 +78,7 @@ function FoodDetail() {
                   onChange={_handleOnChange}
                   disabled={disabled}
                   id="outlined-disabled"
-                  defaultValue={item.name}
+                  defaultValue={food.name}
                 />
               </span>
             </div>
@@ -89,7 +89,7 @@ function FoodDetail() {
                   onChange={_handleOnChange}
                   disabled={disabled}
                   id="outlined-disabled"
-                  defaultValue={`${item.price}`}
+                  defaultValue={`${food.price}`}
                 /> $
                 </span>
             </div>
@@ -100,7 +100,7 @@ function FoodDetail() {
                 onChange={_handleOnChange}
                 disabled={disabled}
                 id="outlined-disabled"
-                defaultValue={item.quantity}
+                defaultValue={food.quantity}
               />
             </div>
             <div>
@@ -111,13 +111,13 @@ function FoodDetail() {
                 onChange={_handleOnChange}
                 disabled={disabled}
                 id="outlined-disabled"
-                defaultValue={item.url}
+                defaultValue={food.url}
               />
             </div>
-            <img className="image_food" src={checkURL(item.url) ? item.url : "https://shareprogramming.net/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png"} />
-            <Button onClick={() => _handleUpdateFood(item.name, item.id)}>{disabled ? "Edit" : "Accept"}</Button>
+            <img className="image_food" src={checkURL(food.url) ? food.url : "https://shareprogramming.net/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png"} />
+            <Button onClick={() => _handleUpdateFood(food.name, food.id)}>{disabled ? "Edit" : "Accept"}</Button>
           </FormControl>
-        ))
+        )
       }
     </>
   )
