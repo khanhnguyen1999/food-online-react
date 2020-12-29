@@ -30,3 +30,7 @@ label#gender,label#language {
   background:#fff;
   margin-top:10px;
 }
+.MuiButton-label>a {
+  text-decoration: none;
+  color:red
+}
