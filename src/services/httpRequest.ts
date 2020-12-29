@@ -15,6 +15,10 @@ class HttpRequest {
   async post(url: string, bodyData = {}, config?: IConfig) {
     return this.api.post(url, bodyData, config);
   }
+
+  async put(url: string, bodyData = {}, config?: IConfig) {
+    return this.api.put(url, bodyData, config);
+  }
 }
 
 const httpRequest = new HttpRequest();

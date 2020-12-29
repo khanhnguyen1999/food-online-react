@@ -79,9 +79,9 @@
     {
       "id": 0,
       "name": "Chicken",
-      "price": 30,
-      "quantity": 3,
-      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKuC18GlYbzaceuHbU4p2wbvdOMD2wF4uJng&usqp=CAU"
+      "price": "31",
+      "quantity": "32",
+      "url": "https://diethood.com/wp-content/uploads/2019/07/Whole-Roast-Chicken.jpg"
     },
     {
       "id": 1,
@@ -105,11 +105,11 @@
       "url": "https://media-cdn.tripadvisor.com/media/photo-s/12/27/f6/07/soup-restaurant-chicken.jpg"
     },
     {
-      "id": 5,
-      "name": "Chicken",
+      "name": "check",
       "price": 30,
       "quantity": 3,
-      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKuC18GlYbzaceuHbU4p2wbvdOMD2wF4uJng&usqp=CAU"
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKuC18GlYbzaceuHbU4p2wbvdOMD2wF4uJng&usqp=CAU",
+      "id": 5
     },
     {
       "id": 6,

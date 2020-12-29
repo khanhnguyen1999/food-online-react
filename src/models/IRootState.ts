@@ -4,6 +4,7 @@ export type IAppState = {
     type: 'error' | 'success',
     isShow: boolean,
     content: string,
+    dataUpdate: any
   },
 }
 
@@ -30,7 +31,9 @@ type IFoodData = {
 }
 export type IFoodState = {
   listfood: IFoodData | null,
-  food: IFoodData | null
+  food: IFoodData | null,
+  newFood: IFoodData | null,
+  foodId: number | null
 }
 export type IUserState = {
   currentUser: IUserData | null

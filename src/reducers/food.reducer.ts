@@ -1,11 +1,13 @@
-import { FETCH_ALL_DATA_FOODS, GET_FOOD_DETAIL_BY_ID } from "../actions/food.action";
+import { FETCH_ALL_DATA_FOODS, GET_FOOD_DETAIL_BY_ID, GET_NEW_DATA_FOOD_UPDATE, UPDATE_FOOD_DETAIL } from "../actions/food.action";
 import { Action } from '../models/IRoute'
 import { IFoodState } from '../models/IRootState'
 
 
 const initState: IFoodState = {
   listfood: null,
-  food: null
+  food: null,
+  newFood: null,
+  foodId: null
 }
 
 export default function FoodReducer(state = initState, action: Action) {
@@ -19,6 +21,21 @@ export default function FoodReducer(state = initState, action: Action) {
       return {
         ...state,
         food: action.payload
+      }
+    case GET_NEW_DATA_FOOD_UPDATE:
+      return {
+        ...state,
+        newFood: action.payload.data,
+        foodId: action.payload.id
+      }
+    case UPDATE_FOOD_DETAIL:
+      const fakedata: any = state.listfood
+      const index = fakedata.findIndex((item: any) => item.id === action.payload.id)
+      fakedata[index] = action.payload.food
+      return {
+        ...state,
+        listfood: fakedata,
+        food: [action.payload.food]
       }
     default:
       return state;

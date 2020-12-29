@@ -8,11 +8,12 @@ export const actSetLoading = (isLoading: boolean) => ({
   payload: isLoading,
 });
 
-export const actSetDialog = (isShow: boolean, type: string = 'error', content: string = '') => ({
+export const actSetDialog = (isShow: boolean, type: string = 'error', content: string = '', dataUpdate: any = "") => ({
   type: SET_DIALOG,
   payload: {
     type,
     isShow,
     content,
+    dataUpdate
   },
 });

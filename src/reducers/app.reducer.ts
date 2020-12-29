@@ -9,6 +9,7 @@ const initialState: IAppState = {
     type: 'error',
     isShow: false,
     content: '',
+    dataUpdate: ''
   },
 };
 
@@ -26,6 +27,7 @@ const reducer = (state = initialState, { type, payload }: Action) => {
           type: payload.type,
           isShow: payload.isShow,
           content: payload.content,
+          dataUpdate: payload.dataUpdate
         },
       };
     default:

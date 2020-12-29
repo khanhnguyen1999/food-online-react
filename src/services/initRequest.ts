@@ -66,7 +66,6 @@ export default function initRequest(store: any) {
 
       switch (error.response?.status) {
         case 404: {
-          console.log('show dialog 404');
           break
         }
         default:

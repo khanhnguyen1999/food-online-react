@@ -11,10 +11,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { useSelector, useDispatch } from 'react-redux'
 import { setDialog } from 'selectors/app.selector'
 import { actSetDialog } from 'actions/app.action'
+import { asyncUpdateFood } from 'actions/food.action'
+import { getNewFoodDataUpdate, getFoodId } from 'selectors/food.selector'
+
 
 const DialogComponent = () => {
 
   const dialog: any = useSelector(setDialog)
+  const newData: any = useSelector(getNewFoodDataUpdate)
+  const foodId: any = useSelector(getFoodId)
   const dispatch = useDispatch()
 
 
@@ -29,7 +34,8 @@ const DialogComponent = () => {
     const isShow = false
     const content = dialog.content
     const type = ""
-    dispatch(actSetDialog(isShow, content))
+    dispatch(asyncUpdateFood(foodId, newData))
+    dispatch(actSetDialog(isShow, type, content))
   }
 
   return (

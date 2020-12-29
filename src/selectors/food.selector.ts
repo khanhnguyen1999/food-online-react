@@ -9,3 +9,11 @@ export const fooddetailSelector = createSelector(
   (state: IRootState) => state.food,
   (food) => food.food
 )
+export const getNewFoodDataUpdate = createSelector(
+  (state: IRootState) => state.food,
+  (food) => food.newFood
+)
+export const getFoodId = createSelector(
+  (state: IRootState) => state.food,
+  (food) => food.foodId
+)

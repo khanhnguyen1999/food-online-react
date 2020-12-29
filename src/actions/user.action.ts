@@ -47,7 +47,6 @@ export const asyncHandleRegister = (data: RegisterDataType) => {
           }
         } else {
           const user = response.data;
-          console.log("user ", user)
           const token = response.data.token;
           localStorage.setItem("token", token)
           // dispatch(actLoginSuccess({ token }));

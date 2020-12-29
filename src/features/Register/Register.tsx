@@ -85,7 +85,6 @@ const Register: React.FunctionComponent = () => {
       }
       const response: any = await dispatch(asyncHandleRegister(dataLogin))
       if (response.ok) {
-        console.log("res ", response.ok)
         return history.push("/");
       }
       else {
