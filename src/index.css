@@ -23,3 +23,10 @@ label#gender,label#language {
   max-width:500px;
   max-width:500px;
 }
+.makeStyles-content-3>button{
+  padding:10px;
+  color:black;
+  border:1px solid black;
+  background:#fff;
+  margin-top:10px;
+}
