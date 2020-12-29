@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 
 // actions
-import { setLoading, setDialog } from 'actions/app.action';
+import { actSetLoading, actSetDialog } from 'actions/app.action';
 
 export type IConfig = AxiosRequestConfig & {
   showSpinner?: boolean;
@@ -31,7 +31,7 @@ export default function initRequest(store: any) {
   function decreaseRequestCount() {
     requestCount -= 1;
     if (requestCount === 0) {
-      store.dispatch(setLoading(false));
+      store.dispatch(actSetLoading(false));
     }
   }
 
@@ -39,7 +39,7 @@ export default function initRequest(store: any) {
     (config: IConfig) => {
       if (config.showSpinner) {
         requestCount += 1;
-        store.dispatch(setLoading(true));
+        store.dispatch(actSetLoading(true));
       }
       return config;
     },
@@ -61,7 +61,7 @@ export default function initRequest(store: any) {
     (error: IAxiosResponse) => {
       if (error && error.config.showSpinner) {
         decreaseRequestCount();
-        store.dispatch(setDialog(true));
+        store.dispatch(actSetDialog(true));
       }
 
       switch (error.response?.status) {

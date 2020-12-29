@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { TableBody, TableFooter } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { listfoodSelector } from '../../selectors/food.selector'
 
 import { TablePagination } from '@material-ui/core';
+import TablePaginationActions from './TablePaginationActions'
 
 // import { CSVLink } from "react-csv";
 import CsvDownloader from 'react-csv-downloader';
@@ -29,21 +30,42 @@ import SearchIcon from "@material-ui/icons/Search";
 import { Link } from 'react-router-dom'
 
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  search: {
-    margin: "0"
-  }
-});
-
+// const useStyles2 = makeStyles(theme => ({
+//   root: {
+//     width: "100%",
+//     marginTop: theme.spacing(3)
+//   },
+//   table: {
+//     minWidth: 500
+//   },
+//   tableWrapper: {
+//     overflowX: "auto"
+//   }
+// }));
 
 
 function Foods() {
-  const classes = useStyles();
-  const rows: any = useSelector(listfoodSelector)
+  // use theme
+  const theme = useTheme()
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+    search: {
+      margin: "0"
+    },
+    root: {
+      width: "100%",
+      marginTop: theme.spacing(3)
+    },
+    tableWrapper: {
+      overflowX: "auto"
+    }
+  });
 
+
+  // const classes = useStyles();
+  const rows: any = useSelector(listfoodSelector)
 
   // filter search data
   const [showClearIcon, setShowClearIcon] = useState("none");
@@ -57,7 +79,8 @@ function Foods() {
   };
 
   useEffect(() => {
-    setData(rows)
+    const fk_data = rows && rows.sort((a: any, b: any) => a.id < b.id ? -1 : 1)
+    setData(fk_data)
   }, [rows, filter])
 
   useEffect(() => {
@@ -67,8 +90,6 @@ function Foods() {
     })
     setData(dataFilter)
   }, [searchData])
-
-  console.log("data ", rows)
 
   // export csv
   const headers: any = [
@@ -83,21 +104,25 @@ function Foods() {
   };
 
   // pagination table 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (event: any, newPage: any) => {
-    console.log("data ", data)
-    console.log(newPage)
+  const defaultRowsPerPageOption = 5
+  const rowsPerPageOptions = [5, 10, 15]
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(
+    defaultRowsPerPageOption || rowsPerPageOptions[0]
+  );
+
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+
+  function handleChangePage(event: any, newPage: number) {
     setPage(newPage);
-  };
+  }
 
-  const handleChangeRowsPerPage = (event: any) => {
-    console.log("event ", event.target.value)
-    setRowsPerPage(+event.target.value);
+  function handleChangeRowsPerPage(event: any) {
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
+  }
 
   return (
     <>
@@ -137,7 +162,7 @@ function Foods() {
               {data && data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => (
-                  <TableRow key={row.name}>
+                  <TableRow key={row.id}>
                     <TableCell>{row.id}</TableCell>
                     <TableCell align="left">
                       {row.name}
@@ -153,18 +178,32 @@ function Foods() {
                     </TableCell>
                   </TableRow>
                 ))}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 48 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={rowsPerPageOptions}
+                  colSpan={3}
+                  count={data.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  SelectProps={{
+                    inputProps: { "aria-label": "rows per page" },
+                    value: rowsPerPage
+                  }}
+                  onChangePage={handleChangePage}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10]}
-          component="div"
-          count={rows && rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
       </Paper>
       <CsvDownloader
         filename="FOODS_ONLINE"
@@ -177,3 +216,6 @@ function Foods() {
 }
 
 export default Foods
+
+
+

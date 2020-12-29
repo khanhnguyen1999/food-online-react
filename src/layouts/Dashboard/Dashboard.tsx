@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Header from 'components/Header';
 import NavBar from 'components/NavBar';
+import Dialog from 'components/Dialog'
 
 // containers
 import Auth from 'containers/Auth';
@@ -30,17 +31,18 @@ function Dashboard() {
 
   return (
     <Auth>
-       <CssBaseline />
-      
+      <CssBaseline />
+
       <Header />
       <NavBar />
-      
+
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {routes.map((route, idx) => (
           <Route key={idx} path={route.path} exact={route.exact} name={route.name} component={route.component} />
         ))}
       </main>
+      <Dialog />
     </Auth>
   )
 }
