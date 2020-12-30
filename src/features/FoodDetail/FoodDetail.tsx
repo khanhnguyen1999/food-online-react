@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom'
 // redux
 import { useDispatch, useSelector } from 'react-redux'
 import { setDialog } from 'selectors/app.selector'
-import { fooddetailSelector } from 'selectors/food.selector'
-import { asyncFetchFoodDetailData, actNewFoodDataUpdate } from '../../actions/food.action'
+import { fooddetailSelector, listfoodSelector } from 'selectors/food.selector'
+import { asyncFetchFoodDetailData, actNewFoodDataUpdate, asyncFetchFoodData } from '../../actions/food.action'
 import { actSetDialog } from 'actions/app.action'
 
 import { Button, FormControl, TextField } from "@material-ui/core"
@@ -24,13 +24,17 @@ function FoodDetail() {
   const dialog = useSelector(setDialog)
   const [disabled, setDisabled] = useState(true)
   const food: any = useSelector(fooddetailSelector)
+  const listfood: any = useSelector(listfoodSelector)
   const [data, setData] = useState({})
   const [foodData, setFoodData] = useState(null)
 
-  // fetch all data foods 
+  // fetch all data foods   
+  useEffect(() => {
+    dispatch(asyncFetchFoodData())
+  }, [dispatch])
   useEffect(() => {
     dispatch(asyncFetchFoodDetailData(id))
-  }, [id, dispatch])
+  }, [id, dispatch, listfood])
   useEffect(() => {
     setFoodData(food)
   }, [food])

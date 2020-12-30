@@ -1,4 +1,10 @@
-import { FETCH_ALL_DATA_FOODS, GET_FOOD_DETAIL_BY_ID, GET_NEW_DATA_FOOD_UPDATE, UPDATE_FOOD_DETAIL_FAIL, UPDATE_FOOD_DETAIL_SUCCESS } from "../actions/food.action";
+import {
+  FETCH_ALL_DATA_FOODS,
+  GET_FOOD_DETAIL_BY_ID,
+  GET_NEW_DATA_FOOD_UPDATE,
+  UPDATE_FOOD_DETAIL_FAIL,
+  UPDATE_FOOD_DETAIL_SUCCESS
+} from "../actions/food.action";
 import { Action } from '../models/IRoute'
 import { IFoodState } from '../models/IRootState'
 
@@ -30,7 +36,6 @@ export default function FoodReducer(state = initState, action: Action) {
       }
 
     case UPDATE_FOOD_DETAIL_SUCCESS:
-      console.log('action.payload', action.payload)
       return {
         ...state,
         food: action.payload.food,

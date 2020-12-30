@@ -67,23 +67,20 @@ export const actGetFoodDetailData = ({ food }: FOOD) => ({
   payload: food
 })
 export const asyncFetchFoodDetailData = (id: string) => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch, getState: any) => {
+    const { food }: any = getState()
+    const foods: any = food.listfood
     try {
-      const response = await httpRequest.get(`/foods/${id}`);
-      if (response.data.length === 0) {
-        return {
-          ok: false,
-          res: 'Food not found'
-        }
+      const response: any = foods && foods.filter((item: any) => {
+        return item.id === parseInt(id)
+      })
+      if (response.length === 0) {
+        throw new Error('Update food fail')
       }
-      const food = response.data;
-      dispatch(actGetFoodDetailData({ food }))
-      return {
-        ok: true,
-        res: food
-      }
+      const food = response[0];
+      dispatch(actUpdateFoodSucess(food));
     } catch (err) {
-      return { ok: false, res: "Error. Please try again.." }
+      dispatch(actUpdateFoodFail("Error..."));
     }
   }
 }
@@ -106,7 +103,7 @@ export const actUpdateFoodFail = (error: string) => ({
 export const asyncUpdateFood = ({
   food, cb,
 }: any) => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<any>, getState: any) => {
     try {
       const response = await httpRequest.put(`/foods/${food.id}`, JSON.stringify(food));
       if (response.data === {}) {
