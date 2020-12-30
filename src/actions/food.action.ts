@@ -3,6 +3,9 @@ import { Dispatch } from 'redux'
 import { httpRequest } from 'services';
 import { actSetDialog } from './app.action';
 
+import { AlertType } from 'models/IRoute'
+import { actShowNotification, actHideNotification } from 'actions/notification.action'
+
 const nameSpace = 'food:';
 
 export const FETCH_ALL_DATA_FOODS = `${nameSpace}FETCH_ALL_DATA_FOODS`
@@ -17,11 +20,6 @@ type FOODS = {
 type FOOD = {
   food: any,
 }
-type UPDATE_FOOD = {
-  food: any,
-  id: number
-}
-
 
 // food update 
 export const actNewFoodDataUpdate = (id: number, data: any) => ({
@@ -116,9 +114,18 @@ export const asyncUpdateFood = ({
       }
       const result = response.data;
       dispatch(actUpdateFoodSucess(result));
+      const type = AlertType.success
+      const isContent: string = "Your food updated successful.."
+      var isShow = true
+      dispatch(actShowNotification({ type, isContent, isShow }))
+      setTimeout(() => {
+        // isHide = false
+        dispatch(actHideNotification())
+      }, 5000)
     }
     catch (err) {
       dispatch(actUpdateFoodFail(err.message));
+      // you can use callback function to call a function inside or dispatch a action
       // cb();
     }
     dispatch(actSetDialog(false, "", ""))

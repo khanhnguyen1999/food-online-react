@@ -11,14 +11,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setDialog } from 'selectors/app.selector'
 import { actSetDialog } from 'actions/app.action'
 import { asyncUpdateFood } from 'actions/food.action'
-import { getNewFoodDataUpdate, getFoodId } from 'selectors/food.selector'
+import { getNewFoodDataUpdate } from 'selectors/food.selector'
 
 
 const DialogComponent = () => {
 
   const dialog: any = useSelector(setDialog)
   const newData: any = useSelector(getNewFoodDataUpdate)
-  const foodId: any = useSelector(getFoodId)
   const dispatch = useDispatch()
 
 
@@ -30,15 +29,9 @@ const DialogComponent = () => {
   }
 
   const _handleUpdate = async () => {
-    const isShow = false
-    const content = dialog.content
-    const type = ""
-    console.log('asyncUpdateFood', newData)
     dispatch(asyncUpdateFood({
       food: newData, cb: () => { console.log(1234123) },
     }))
-    // console.log("Response ", response)
-    // dispatch(actSetDialog(isShow, type, content))
   }
 
   return (

@@ -106,7 +106,6 @@ function FoodDetail() {
             <div>
               <span>Image url:</span>
               <TextField
-                // value={data.url}
                 name="url"
                 onChange={_handleOnChange}
                 disabled={disabled}
@@ -114,7 +113,7 @@ function FoodDetail() {
                 defaultValue={food.url}
               />
             </div>
-            <img className="image_food" src={checkURL(food.url) ? food.url : "https://shareprogramming.net/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png"} />
+            <img alt={food.name} className="image_food" src={checkURL(food.url) ? food.url : "https://shareprogramming.net/wp-content/plugins/accelerated-mobile-pages/images/SD-default-image.png"} />
             <Button onClick={() => _handleUpdateFood(food.name, food.id)}>{disabled ? "Edit" : "Accept"}</Button>
           </FormControl>
         )

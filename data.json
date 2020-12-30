@@ -78,9 +78,9 @@
   "foods": [
     {
       "id": 0,
-      "name": "Chicken",
-      "price": "21",
-      "quantity": "39",
+      "name": "Chicken1",
+      "price": "20",
+      "quantity": "301",
       "url": "https://diethood.com/wp-content/uploads/2019/07/Whole-Roast-Chicken.jpg"
     },
     {
@@ -88,7 +88,7 @@
       "name": "Fish",
       "price": 25,
       "quantity": 2,
-      "url": "https://cdn.pastaxi-manager.onepas.vn/content/uploads/articles/vanth/HaoYu/nha-hang-hao-yu-grilled-fisd-restaurant-ho-xuan-huong-5.jpg"
+      "url": ""
     },
     {
       "id": 3,

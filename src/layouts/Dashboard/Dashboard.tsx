@@ -14,6 +14,7 @@ import Auth from 'containers/Auth';
 
 // routes
 import routes from 'routes';
+import Notification from 'components/Notification';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,6 +44,7 @@ function Dashboard() {
         ))}
       </main>
       <Dialog />
+      <Notification />
     </Auth>
   )
 }

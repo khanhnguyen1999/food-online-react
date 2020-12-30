@@ -36,16 +36,7 @@ export default function FoodReducer(state = initState, action: Action) {
         food: action.payload.food,
       }
     case UPDATE_FOOD_DETAIL_FAIL:
-      console.log('UPDATE_FOOD_DETAIL_FAIL action.payload', action.payload)
       return { ...state }
-    // const fakedata: any = state.listfood
-    // const index = fakedata.findIndex((item: any) => item.id === action.payload.id)
-    // fakedata[index] = action.payload.food
-    // return {
-    //   ...state,
-    //   listfood: fakedata,
-    //   food: [action.payload.food]
-    // }
     default:
       return state;
   }

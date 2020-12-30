@@ -1,3 +1,4 @@
+import { NotifyType } from './IRoute'
 export type IAppState = {
   isLoading: boolean;
   dialog: {
@@ -43,7 +44,8 @@ type IRootState = {
   app: IAppState;
   user: IUserState;
   auth: IAuthState;
-  food: IFoodState
+  food: IFoodState;
+  notify: NotifyType
 };
 
 export default IRootState;
