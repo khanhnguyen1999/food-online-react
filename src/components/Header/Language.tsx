@@ -1,4 +1,5 @@
 import React, { useState, memo } from 'react';
+import { useDispatch } from 'react-redux'
 
 // material core
 import MenuItem from '@material-ui/core/MenuItem';
@@ -11,18 +12,21 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // configs
 import { LANGUAGE } from '../../configs';
 
-// context
+// redux
+import { actSetLanguage } from 'actions/app.action'
 
 function Language({ ...classes }) {
+  const [language, setLanguage] = useState("en")
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const language = 'en';
+  const dispatch = useDispatch()
 
   const _handleOpenLanguage = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
   const _handleChooseLanguage = (lang: string) => () => {
-    // setLanguage(lang);
+    setLanguage(lang);
+    dispatch(actSetLanguage(lang))
     setAnchorEl(null);
   };
 

@@ -1,5 +1,6 @@
 export type IAppState = {
   isLoading: boolean;
+  isLanguage: string,
   dialog: {
     type: 'error' | 'success',
     isShow: boolean,

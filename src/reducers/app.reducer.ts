@@ -1,7 +1,7 @@
 import { IAppState } from 'models/IRootState';
 
 import { Action } from 'models/IRoute';
-import { SET_LOADING, SET_DIALOG } from '../actions/app.action';
+import { SET_LOADING, SET_DIALOG, SET_LANGUAGE } from '../actions/app.action';
 
 const initialState: IAppState = {
   isLoading: false,
@@ -11,6 +11,7 @@ const initialState: IAppState = {
     content: '',
     dataUpdate: ''
   },
+  isLanguage: 'en'
 };
 
 const reducer = (state = initialState, { type, payload }: Action) => {
@@ -30,6 +31,11 @@ const reducer = (state = initialState, { type, payload }: Action) => {
           dataUpdate: payload.dataUpdate
         },
       };
+    case SET_LANGUAGE:
+      return {
+        ...state,
+        isLanguage: payload,
+      }
     default:
       return state;
   }
