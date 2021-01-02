@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // material core
 import Divider from '@material-ui/core/Divider';
@@ -21,6 +22,7 @@ import useStyles from './style';
 function NavBar() {
   const classes = useStyles();
   const history = useHistory();
+  const { t: translate } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -38,7 +40,7 @@ function NavBar() {
       <List>
         <ListItem button onClick={_handleNavigate('/home')}>
           <ListItemIcon><InboxIcon /></ListItemIcon>
-          <ListItemText primary="Home" />
+          <ListItemText primary={translate('HOME')} />
         </ListItem>
         <ListItem button onClick={_handleNavigate('/about')}>
           <ListItemIcon><MailIcon /></ListItemIcon>
