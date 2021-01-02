@@ -152,7 +152,6 @@ function Foods() {
             </TableHead>
             <TableBody>
               {dataPagination && dataPagination
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => (
                   <TableRow key={row.id}>
                     <TableCell>{row.id}</TableCell>
