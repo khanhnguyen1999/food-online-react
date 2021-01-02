@@ -78,10 +78,9 @@
   "foods": [
     {
       "id": 0,
-      "name": "Chicken",
-      "price": "31",
-      "quantity": "32",
-      "url": "https://diethood.com/wp-content/uploads/2019/07/Whole-Roast-Chicken.jpg"
+      "price": "123",
+      "quantity": "123",
+      "name": "truong"
     },
     {
       "id": 1,
@@ -183,7 +182,7 @@
     },
     {
       "id": 16,
-      "name": "Soup",
+      "name": "Soup12311",
       "price": 3,
       "quantity": 9,
       "url": ""

@@ -98,10 +98,10 @@ export const actUpdateFood = ({ id, food }: UPDATE_FOOD) => ({
   }
 })
 
-export const asyncUpdateFood = (id: number, newData: any) => {
+export const asyncUpdateFood = (id: number, newFood: any) => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await httpRequest.put(`/foods/${id}`, JSON.stringify(newData[0]));
+      const response = await httpRequest.put(`/foods/${id}`, newFood);
       if (response.data.length === 0) {
         return {
           ok: false,
