@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { listfoodSelector } from '../../selectors/food.selector'
-import { asyncFetchFoodData, asyncPaginationFoods } from 'actions/food.action'
+import { asyncFetchFoodData, asyncPaginationFoods, asycnSearchFoods } from 'actions/food.action'
 
 import { TablePagination } from '@material-ui/core';
 import TablePaginationActions from './TablePaginationActions'
@@ -67,6 +67,7 @@ function Foods() {
     setShowClearIcon(event.target.value === "" ? "none" : "flex");
   };
 
+
   useEffect(() => {
     dispatch(asyncFetchFoodData())
   }, [dispatch])
@@ -75,13 +76,13 @@ function Foods() {
     setData(fk_data)
   }, [rows, filter])
 
-  useEffect(() => {
-    setFilter(rows)
-    const dataFilter: any = filter.filter((item: any) => {
-      return item.name.toLowerCase().includes(searchData.toLowerCase());
-    })
-    setData(dataFilter)
-  }, [searchData])
+  // useEffect(() => {
+  //   setFilter(rows)
+  //   const dataFilter: any = filter.filter((item: any) => {
+  //     return item.name.toLowerCase().includes(searchData.toLowerCase());
+  //   })
+  //   setData(dataFilter)
+  // }, [searchData])
 
   // pagination table 
 
@@ -95,7 +96,6 @@ function Foods() {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data && data.length - page * rowsPerPage);
 
-  console.log("row ", rowsPerPage, page)
 
   function handleChangePage(event: any, newPage: number) {
     setPage(newPage);
@@ -105,6 +105,20 @@ function Foods() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   }
+
+  // search food call api
+  useEffect(() => {
+    const search = async () => {
+      const res: any = await dispatch(asycnSearchFoods(searchData)
+      )
+      if (res.ok) {
+        setDataPagination(res.data)
+      }
+    }
+    search()
+  }, [searchData, setDataPagination])
+
+  // pagination call api
   useEffect(() => {
     const pg = async () => {
       const res: any = await dispatch(asyncPaginationFoods({ rowsPerPage, page }))
