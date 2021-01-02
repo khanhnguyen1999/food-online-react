@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { PureComponent, useState, useEffect } from 'react'
+
+// recharts
+// import {
+//   BarChart, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+// } from 'recharts';
+
+// selector
+import { useSelector } from 'react-redux'
+import { listfoodSelector } from 'selectors/food.selector'
 
 function Home() {
+  const food: any = useSelector(listfoodSelector)
+  const [data, setData] = useState([])
+  useEffect(() => {
+    setData(food)
+  }, [food])
+  console.log("food ", data)
   return (
     <div>
-      this is home
+
     </div>
   )
 }

@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { listfoodSelector } from '../../selectors/food.selector'
-import { asyncFetchFoodData } from 'actions/food.action'
+import { asyncFetchFoodData, asyncPaginationFoods } from 'actions/food.action'
 
 import { TablePagination } from '@material-ui/core';
 import TablePaginationActions from './TablePaginationActions'
@@ -59,6 +59,7 @@ function Foods() {
   const [filter, setFilter] = useState([])
   const [data, setData] = useState([])
   const dispatch = useDispatch()
+  const [dataPagination, setDataPagination] = useState([])
 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -94,6 +95,8 @@ function Foods() {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data && data.length - page * rowsPerPage);
 
+  console.log("row ", rowsPerPage, page)
+
   function handleChangePage(event: any, newPage: number) {
     setPage(newPage);
   }
@@ -102,7 +105,17 @@ function Foods() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   }
+  useEffect(() => {
+    const pg = async () => {
+      const res: any = await dispatch(asyncPaginationFoods({ rowsPerPage, page }))
+      if (res.ok) {
+        setDataPagination(res.data)
+      }
+    }
+    pg()
+  }, [page, rowsPerPage, setDataPagination])
 
+  console.log("check ", dataPagination)
   return (
     <>
       <FormControl className={classes.search}>
@@ -138,7 +151,7 @@ function Foods() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data && data
+              {dataPagination && dataPagination
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => (
                   <TableRow key={row.id}>

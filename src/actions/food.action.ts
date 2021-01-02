@@ -2,6 +2,8 @@ import { Dispatch } from 'redux'
 
 import { httpRequest } from 'services';
 
+import { IPaginaition } from 'models/IPagination'
+
 const nameSpace = 'food:';
 
 export const FETCH_ALL_DATA_FOODS = `${nameSpace}FETCH_ALL_DATA_FOODS`
@@ -116,6 +118,29 @@ export const asyncUpdateFood = (id: number, newFood: any) => {
       }
     }
     catch (err) {
+      return { ok: false, res: "Error. Please try again.." }
+    }
+  }
+}
+
+
+// pagination pages 
+export const asyncPaginationFoods = ({ rowsPerPage, page }: IPaginaition) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const response = await httpRequest.get(`/foods?_page=${page + 1}&_limit=${rowsPerPage}`);
+      console.log("response ", response)
+      if (response.data.length === 0) {
+        return {
+          ok: false,
+          res: 'Food not found'
+        }
+      }
+      return {
+        ok: true,
+        data: response.data
+      }
+    } catch (err) {
       return { ok: false, res: "Error. Please try again.." }
     }
   }
