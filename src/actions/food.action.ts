@@ -149,7 +149,7 @@ export const asyncPaginationFoods = ({ rowsPerPage, page }: IPaginaition) => {
 export const asycnSearchFoods = (text: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await httpRequest.get(`/foods?name=${text}`);
+      const response = await httpRequest.get(`/foods?q=${text}`);
       if (response.data.length === 0) {
         return {
           ok: false,
