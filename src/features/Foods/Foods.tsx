@@ -127,7 +127,7 @@ function Foods() {
       }
     }
     pg()
-  }, [page, rowsPerPage, setDataPagination, searchData])
+  }, [page, rowsPerPage, setDataPagination])
 
   console.log("check ", dataPagination)
   return (
