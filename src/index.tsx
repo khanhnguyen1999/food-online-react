@@ -12,6 +12,9 @@ import App from './App';
 
 import { initRequest } from 'services';
 
+// locales
+import 'locales/i18n';
+
 initRequest(Store);
 
 const theme = createMuiTheme({
