@@ -129,7 +129,6 @@ function Foods() {
     pg()
   }, [page, rowsPerPage, setDataPagination])
 
-  console.log("check ", dataPagination)
   return (
     <>
       <FormControl className={classes.search}>

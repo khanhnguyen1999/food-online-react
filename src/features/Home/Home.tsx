@@ -15,7 +15,6 @@ function Home() {
   useEffect(() => {
     setData(food)
   }, [food])
-  console.log("food ", data)
   return (
     <div>
 
