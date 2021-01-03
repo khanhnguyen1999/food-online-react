@@ -15,6 +15,7 @@ const Auth = ({ children }: IProps) => {
   const dispatch = useDispatch();
   const token = authService.getAccessToken();
 
+
   useEffect(() => {
     if (!token) return;
     dispatch(actLoginSuccess(token));

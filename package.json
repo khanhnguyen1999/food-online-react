@@ -32,6 +32,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-toast-notifications": "^2.4.0",
+    "recharts": "^1.7.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
@@ -74,7 +75,6 @@
     "@types/react-redux": "^7.1.14",
     "@types/react-router-dom": "^5.1.6",
     "@types/react-toast-notifications": "^2.4.0",
-    "@types/styled-components": "^5.1.7",
-    "recharts": "^2.0.0"
+    "@types/styled-components": "^5.1.7"
   }
 }
