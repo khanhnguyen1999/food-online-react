@@ -124,44 +124,25 @@ export const asyncUpdateFood = (id: number, newFood: any) => {
 }
 
 
-// pagination pages 
-export const asyncPaginationFoods = ({ rowsPerPage, page }: IPaginaition) => {
-  return async (dispatch: Dispatch) => {
-    try {
-      const response = await httpRequest.get(`/foods?_page=${page + 1}&_limit=${rowsPerPage}`);
-      if (response.data.length === 0) {
-        return {
-          ok: false,
-          res: 'Food not found'
-        }
-      }
-      return {
-        ok: true,
-        data: response.data
-      }
-    } catch (err) {
-      return { ok: false, res: "Error. Please try again.." }
-    }
-  }
-}
 
-// search food 
-export const asycnSearchFoods = (text: string) => {
-  return async (dispatch: Dispatch) => {
-    try {
-      const response = await httpRequest.get(`/foods?q=${text}`);
-      if (response.data.length === 0) {
-        return {
-          ok: false,
-          res: 'Food not found'
-        }
-      }
+export const fetchFoods = async (page: number, perPage: number, q: string) => {
+  try {
+    const response = await httpRequest.get(`/foods?_page=${page}&_limit=${perPage}&q=${q}`, {
+      showSpinner: true
+    });
+
+    if (response.data.length === 0) {
       return {
-        ok: true,
-        data: response.data
+        ok: false,
+        data: 'Food not found'
       }
-    } catch (err) {
-      return { ok: false, res: "Error. Please try again.." }
     }
+
+    return {
+      ok: true,
+      data: response.data
+    }
+  } catch (err) {
+    return { ok: false, data: "Error. Please try again.." }
   }
 }
