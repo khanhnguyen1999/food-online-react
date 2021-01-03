@@ -11,6 +11,7 @@ import Dialog from 'components/Dialog'
 
 // containers
 import Auth from 'containers/Auth';
+import ErrorBundary from 'containers/ErrorBoundary';  
 
 // routes
 import routes from 'routes';
@@ -38,9 +39,11 @@ function Dashboard() {
 
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {routes.map((route, idx) => (
-          <Route key={idx} path={route.path} exact={route.exact} name={route.name} component={route.component} />
-        ))}
+        <ErrorBundary>
+          {routes.map((route, idx) => (
+            <Route key={idx} path={route.path} exact={route.exact} name={route.name} component={route.component} />
+          ))}
+        </ErrorBundary>
       </main>
       <Dialog />
     </Auth>
