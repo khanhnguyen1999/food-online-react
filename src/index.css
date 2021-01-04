@@ -34,3 +34,23 @@ label#gender,label#language {
   text-decoration: none;
   color:red
 }
+.header__logo {
+  background: url(./logo.png) no-repeat 100% 0/cover;
+  height: 30px;
+  width: 80px;
+  opacity: .5;
+  display: block;
+  margin:auto;
+  left: 50%;
+  top: 5px;
+  transform: translateX(-50%);
+}
+.header__container {
+  background-color: #026aa7;
+  box-sizing: border-box;
+  min-height: 40px;
+  max-height: 40px;
+  padding: 4px;
+  display: flex;
+  width: 100%;
+}

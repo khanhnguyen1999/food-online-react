@@ -62,12 +62,12 @@ function Foods() {
 
   const fetchAllFood = useCallback(async () => {
     const res = await fetchFoods(page, perPage, textSearch);
-    if(!res.ok) {
+    if (!res.ok) {
       setError(res.data);
       return;
     };
     setFoods(res.data);
-  },[page, perPage, textSearch]) 
+  }, [page, perPage, textSearch])
 
   useEffect(() => {
     fetchAllFood();
@@ -95,7 +95,7 @@ function Foods() {
           }}
         />
       </FormControl>
-      <br/><br/>
+      <br /><br />
       <Paper>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">

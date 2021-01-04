@@ -15,6 +15,7 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 // material icon
 import MailIcon from '@material-ui/icons/Mail';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import FunctionsIcon from '@material-ui/icons/Functions';
 
 // styles
 import useStyles from './style';
@@ -49,6 +50,10 @@ function NavBar() {
         <ListItem button onClick={_handleNavigate('/foods')}>
           <ListItemIcon><FastfoodIcon /></ListItemIcon>
           <ListItemText primary="Foods" />
+        </ListItem>
+        <ListItem button onClick={_handleNavigate('/trello')}>
+          <ListItemIcon><FunctionsIcon /></ListItemIcon>
+          <ListItemText primary="Trello" />
         </ListItem>
       </List>
     </div>

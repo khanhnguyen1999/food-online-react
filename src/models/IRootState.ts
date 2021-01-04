@@ -40,11 +40,19 @@ export type IUserState = {
   currentUser: IUserData | null
 }
 
+type ITrelloData = {
+  trelloData: any
+}
+export type ITrelloState = {
+  trelloData: ITrelloData | null
+}
+
 type IRootState = {
   app: IAppState;
   user: IUserState;
   auth: IAuthState;
-  food: IFoodState
+  food: IFoodState;
+  trello: ITrelloState
 };
 
 export default IRootState;

@@ -11,7 +11,7 @@ import Dialog from 'components/Dialog'
 
 // containers
 import Auth from 'containers/Auth';
-import ErrorBundary from 'containers/ErrorBoundary';  
+import ErrorBundary from 'containers/ErrorBoundary';
 
 // routes
 import routes from 'routes';
