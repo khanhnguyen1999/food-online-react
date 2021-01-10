@@ -1,3 +1,5 @@
+import { ITrelloState } from './ITrello';
+
 export type IAppState = {
   isLoading: boolean;
   isLanguage: string,
@@ -40,12 +42,6 @@ export type IUserState = {
   currentUser: IUserData | null
 }
 
-type ITrelloData = {
-  trelloData: any
-}
-export type ITrelloState = {
-  trelloData: ITrelloData | null
-}
 
 type IRootState = {
   app: IAppState;

@@ -61,7 +61,7 @@ export default function initRequest(store: any) {
     (error: IAxiosResponse) => {
       if (error && error.config.showSpinner) {
         decreaseRequestCount();
-        store.dispatch(actSetDialog(true));
+        store.dispatch(actSetLoading(true));
       }
 
       switch (error.response?.status) {

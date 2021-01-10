@@ -1,46 +1,45 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 .MuiFormControl-root.makeStyles-textField-8.MuiFormControl-fullWidth {
   padding: 10px 30px;
 }
-label#gender,label#language {
+label#gender,
+label#language {
   margin-left: 35px;
   margin-top: 10px;
 }
 
 .image_food {
-  max-width:500px;
-  max-width:500px;
+  max-width: 500px;
+  max-width: 500px;
 }
-.makeStyles-content-3>button{
-  padding:10px;
-  color:black;
-  border:1px solid black;
-  background:#fff;
-  margin-top:10px;
+.makeStyles-content-3 > button {
+  padding: 10px;
+  color: black;
+  border: 1px solid black;
+  background: #fff;
+  margin-top: 10px;
 }
-.MuiButton-label>a {
+.MuiButton-label > a {
   text-decoration: none;
-  color:red
+  color: red;
 }
 .header__logo {
-  background: url(./logo.png) no-repeat 100% 0/cover;
+  background: url(./logo.png) no-repeat 100% 0 / cover;
   height: 30px;
   width: 80px;
-  opacity: .5;
+  opacity: 0.5;
   display: block;
-  margin:auto;
+  margin: auto;
   left: 50%;
   top: 5px;
   transform: translateX(-50%);
@@ -53,4 +52,110 @@ label#gender,label#language {
   padding: 4px;
   display: flex;
   width: 100%;
+}
+
+/* todo */
+.todo {
+  overflow-x: scroll;
+  width: 100%;
+  height: calc(100vh - 50px);
+  padding: 10px;
+  position: relative;
+}
+
+.todo__container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  white-space: nowrap;
+
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 0px;
+  user-select: none;
+  overflow-x: auto;
+}
+
+.todoList {
+  background-color: #dfe3e6;
+  border-radius: 3px;
+  min-width: 300px;
+  max-width: 300px;
+  padding: 5px;
+  margin: 0 8px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.todoList__content {
+  min-height: 10px;
+}
+
+.todoList__head {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todoList__head__title {
+  width: 100%;
+  width: 100%;
+  padding: 13px 5px;
+  word-break: break-all;
+}
+
+.todoCard {
+  white-space: pre-wrap;
+  max-width: 331px;
+  min-height: 85px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.todoCard:hover .todoCard__button {
+  display: block;
+}
+
+.todoCard__container {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.todoCard__button {
+  right: 5px;
+  top: 5px;
+  display: none;
+  position: absolute;
+  flex-direction: column;
+}
+
+.todoCard__button button {
+  padding: 5px;
+}
+
+.todoCard__title {
+  width: 92%;
+}
+
+.todoCard__member {
+  position: absolute;
+  bottom: 5px;
+  right: 15px;
+}
+
+.todoForm__button {
+  margin-top: 10px;
+  align-items: center;
+  display: flex;
+}
+
+.todoCreate__button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }

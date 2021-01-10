@@ -1,39 +1,8 @@
-import axios from 'axios'
-import { Dispatch } from 'redux'
-
 const nameSpace = 'trello:';
 
-export const FETCT_DATA_TRELLO = `${nameSpace}FETCT_DATA_TRELLO`
+export const DRAG_END_LIST = `${nameSpace}DRAG_END_LIST`;
+export const DRAG_END_CARD = `${nameSpace}DRAG_END_CARD`;
 
-type USER = {
-  name: any
-}
+export const onDragEndList = (payload: any) => ({ type: DRAG_END_LIST, payload });
 
-type TrellData = {
-  name: string
-}
-
-export const actSetTrelloData = ({ trello }: USER) => {
-  return {
-    type: FETCT_DATA_TRELLO,
-    payload: trello
-  }
-}
-
-export const asyncFetchAllDataTrello = () => {
-  return async (dispatch: Dispatch) => {
-    try {
-      const trelloData: any = await axios.get(`http://localhost:3000/trello`)
-      if (trelloData.status !== 200 && trelloData.status !== 201) {
-        return {
-          ok: false,
-          error: "Email was wrong.please input another email..."
-        }
-      }
-      dispatch(actSetTrelloData({ trello: trelloData.data }))
-    }
-    } catch (err) {
-    return { ok: false, error: "Error. Please register again.." }
-  }
-}
-}
+export const onDragEndCard = (payload: any) => ({ type: DRAG_END_CARD, payload });
