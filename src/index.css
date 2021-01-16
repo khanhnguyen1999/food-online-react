@@ -68,7 +68,7 @@ label#language {
   align-items: flex-start;
   flex-direction: row;
   white-space: nowrap;
-
+  padding-top: 10px;
   position: absolute;
   top: 10px;
   left: 10px;
@@ -99,6 +99,7 @@ label#language {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .todoList__head__title {
@@ -152,6 +153,11 @@ label#language {
   margin-top: 10px;
   align-items: center;
   display: flex;
+  justify-content: flex-end;
+}
+
+.todoForm__button button + button {
+  margin-left: 10px;
 }
 
 .todoCreate__button {

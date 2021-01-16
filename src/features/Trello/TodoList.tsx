@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 // material core
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import TextField from '@material-ui/core/TextField';
 
 // material icons
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -12,6 +14,7 @@ import { ICard } from 'models/ITrello';
 
 // components
 import TodoCard from './TodoCard';
+import TodoCreate from './TodoCreate';
 
 type IProps = {
   index: number;
@@ -21,6 +24,9 @@ type IProps = {
 }
 
 function TodoList({ index, listId, title, cards }: IProps) {
+  const [isEditing, setIsEditting] = useState<boolean>(false);
+  const [listTitle, setListTitle] = useState<string>(title);
+
   return (
     <Draggable draggableId={String(listId)} index={index}>
       {(provided) => (
@@ -39,14 +45,34 @@ function TodoList({ index, listId, title, cards }: IProps) {
                   className="todoList__content"
                 >
                   <div className="todoList__head">
-                    <div className="todoList__head__title">
-                     {title}
-                    </div>
-                    <Tooltip title="Delete">
-                      <IconButton color="inherit" aria-label="upload picture" component="span" size="small">
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
+                    {isEditing ? (
+                      <TextField 
+                        id="title" 
+                        fullWidth 
+                        label="Title" 
+                        size="small" 
+                        variant="outlined" 
+                        autoFocus
+                        style={{ height: 46}}
+                        onBlur={() => setIsEditting(false)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setListTitle(e.target.value)}
+                        value={listTitle}
+                      />
+
+                    ) : (
+                      <>
+                        <div className="todoList__head__title" onClick={() => {
+                          setIsEditting(true);
+                        }}>
+                          {title}
+                        </div>
+                        <Tooltip title="Delete">
+                          <IconButton color="inherit" aria-label="upload picture" component="span" size="small">
+                            <DeleteIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </>
+                    )}
                   </div>
                   <div
                     {...providedDrop.droppableProps}
@@ -64,6 +90,9 @@ function TodoList({ index, listId, title, cards }: IProps) {
                         />
                       )
                     })}
+                  </div>
+                  <div>
+                    <TodoCreate listId={listId} />
                   </div>
                 </div>
               )

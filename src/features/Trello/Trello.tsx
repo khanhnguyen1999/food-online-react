@@ -10,6 +10,7 @@ import { onDragEndList, onDragEndCard } from 'actions/trello.action';
 
 // components
 import TodoList from './TodoList';
+import TodoCreate from './TodoCreate';
 
 function Trello() {
   const dispatch = useDispatch();
@@ -38,12 +39,14 @@ function Trello() {
     // the only one that is required
     console.log(result)
 
+    if(!result.destination) return;
+
     if(result.type === 'LIST') {
       dispatch(onDragEndList(result))
     }
 
     if(result.type === 'CARD') {
-      // dispatch(onDragEndCard(result))
+      dispatch(onDragEndCard(result))
     }
   }, [dispatch]);
 
@@ -71,6 +74,7 @@ function Trello() {
                     <TodoList key={list.id} listId={list.id} title={list.title} index={index} cards={card} />
                   )
                 })}
+                 <TodoCreate isLists />
               </div>
             )
           }}
